@@ -17,6 +17,14 @@ class YelpRoulette
     offset = offset(total_count, limit)
     restaurants = businesses(location: location, offset: offset, limit: limit)
     restaurants.shuffle
+
+    {
+      location: location,
+      total: total_count,
+      offset: offset,
+      limit: limit,
+      restaurants: restaurants
+    }
   end
 
   # total count of search results

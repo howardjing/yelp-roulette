@@ -1,0 +1,22 @@
+<div class="restaurant">
+  <% r = restaurant %>
+  <div class="title">
+    <a href="<%= r['url'] %>"><h3><%= r['name'] %></h3></a>
+  </div>
+  <span class="rating">
+    <img src="<%= r['rating_img_url'] %>" title="<%= r['rating'] %>">
+  </span>
+  <span class="categories">
+    <%= r['categories'].map { |category| category.first }.join(", ") %>
+  </span>
+  <div class="snippet">
+    <%= r['snippet_text'] %>
+  </div>
+  <div class="address">
+    <ul>
+    <% r['location']['display_address'].each do |line| %>
+      <li><%= line %></li>
+    <% end %>
+    </ul>
+  </div>
+</div>

@@ -1,0 +1,17 @@
+<% if @winner %>
+<div class="winner">
+  <h3>And the winner is...</h3>
+  <%= erb :_restaurant, locals: { restaurant: @winner } %>
+</div>
+<% end %>
+
+<% if !@losers.empty? %>
+<div class="losers">
+  <h3>The rest...</h3>
+  <% @losers.each do |r| %>
+    <%= erb :_restaurant, locals: { restaurant: r } %>
+  <% end %>
+</div>
+<% end %>
+
+<a href="/">again!</a>

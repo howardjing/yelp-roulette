@@ -19,6 +19,9 @@ get '/search' do
              else
                params[:location]
              end
-  @winner, *@losers = ROULETTE.find_food(location)
+  results   = ROULETTE.find_food(location)
+  @location = results[:location]
+  @total    = results[:total]
+  @winner, *@losers = results[:restaurants]
   erb :search
 end

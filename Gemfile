@@ -5,7 +5,10 @@ gem 'sinatra'
 gem 'rack'
 gem 'oauth'
 gem 'json'
-gem 'unicorn'
+
+group :development, :production do
+  gem 'unicorn'
+end
 
 group :development, :test do
   gem 'pry'

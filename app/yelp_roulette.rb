@@ -5,11 +5,13 @@ require 'json'
 class YelpRoulette
   attr_reader :consumer, :access_token
 
-  def initialize(consumer_key:, consumer_secret:, token:, token_secret:)
-    @consumer = OAuth::Consumer.new(consumer_key, consumer_secret,
+  def initialize(consumer_key:, consumer_secret:, token:, token_secret:,
+    oauth_consumer: OAuth::Consumer, oauth_access_token: OAuth::AccessToken)
+
+    @consumer = oauth_consumer.new(consumer_key, consumer_secret,
       site: "http://api.yelp.com"
     )
-    @access_token = OAuth::AccessToken.new(consumer, token, token_secret)
+    @access_token = oauth_access_token.new(consumer, token, token_secret)
   end
 
   def find_food(location, limit = 20)
@@ -19,10 +21,7 @@ class YelpRoulette
     restaurants.shuffle
 
     {
-      location: location,
       total: total_count,
-      offset: offset,
-      limit: limit,
       restaurants: restaurants
     }
   end

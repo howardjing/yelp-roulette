@@ -26,7 +26,7 @@ class RouletteApp < Sinatra::Base
                  params[:location]
                end
     results   = ROULETTE.find_food(location)
-    @location = results[:location]
+    @location = location
     @total    = results[:total]
     @winner, *@losers = results[:restaurants]
     erb :search

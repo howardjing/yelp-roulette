@@ -19,16 +19,33 @@ class RouletteApp < Sinatra::Base
   end
 
   get '/search' do
-    location = if params[:location].empty?
-                 # hardcoding rocks!
-                 "770 Broadway New York, NY"
-               else
-                 params[:location]
-               end
-    results   = ROULETTE.find_food(location)
-    @location = location
+    results   = find_food(params)
+    @location = results[:location]
     @total    = results[:total]
     @winner, *@losers = results[:restaurants]
     erb :search
+  end
+
+  get '/api/search' do
+    content_type :json
+    find_food(params).to_json
+  end
+
+  private
+
+  def find_food(params)
+    params ||= {}
+    ROULETTE.find_food(
+      get_location(params)
+    )
+  end
+
+  def get_location(params)
+    if params[:location].nil? || params[:location].empty?
+      # hardcoding rocks!
+      "770 Broadway New York, NY"
+    else
+      params[:location]
+    end
   end
 end

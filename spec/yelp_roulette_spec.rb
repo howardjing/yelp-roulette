@@ -70,6 +70,10 @@ describe YelpRoulette do
         expect(restaurants.include?(n)).to be_true
       end
     end
+
+    it "returns a hash with the given location" do
+      expect(roulette.find_food('sup')[:location]).to eq 'sup'
+    end
   end
 
   describe "#total" do

@@ -21,6 +21,7 @@ class YelpRoulette
     restaurants.shuffle
 
     {
+      location: location,
       total: total_count,
       restaurants: restaurants
     }
